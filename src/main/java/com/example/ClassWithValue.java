@@ -1,25 +1,17 @@
 package com.example;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigInteger;
 
 public class ClassWithValue {
-
-	public static final double DOUBLE_VALUE = 5.5;
 	
-	private List<Double> doubleValues = new ArrayList<>();
+	private BigInteger value;
 
-	public List<Double> getDoubleValues() {
-		return doubleValues;
+	public BigInteger getValue() {
+		return value;
 	}
 
-	public void setDoubleValue(double doubleValue) {
-
-		this.doubleValues.clear();
-		this.doubleValues.add(doubleValue);
+	public void setValue(BigInteger value) {
+		this.value = value;
 	}
-
-	public void addDoubleValue(double doubleValue) {
-		this.doubleValues.add(doubleValue);
-	}
+	
 }

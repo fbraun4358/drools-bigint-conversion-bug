@@ -11,9 +11,10 @@ ruleflow-group "RFG-1"
 salience 5
 no-loop true
     when
-        $cwv:    ClassWithValue()
-    then
-    	$cwv.setDoubleValue(ClassWithValue.DOUBLE_VALUE);
+    	$list: List()
+        $cwv1: ClassWithValue( $v: value )
+        $cwv2: ClassWithValue( value == $v - 1 )
         
-        update($cwv);
+    then
+    	$list.add($cwv2);
 end
