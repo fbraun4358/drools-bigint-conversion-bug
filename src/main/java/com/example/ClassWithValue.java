@@ -1,14 +1,16 @@
 package com.example;
 
+import java.math.BigInteger;
+
 public class ClassWithValue {
 	
-	private String value;
+	private BigInteger value;
 
-	public String getValue() {
+	public BigInteger getValue() {
 		return value;
 	}
 
-	public void setValue(String value) {
+	public void setValue(BigInteger value) {
 		this.value = value;
 	}
 	

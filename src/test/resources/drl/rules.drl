@@ -11,11 +11,10 @@ ruleflow-group "RFG-1"
 salience 5
 no-loop true
     when
-        $list: List()
-        $cwvs:    (
-            List(size > 0) from collect ( ClassWithValue(value == null) ) or
-            List(size > 0) from collect ( ClassWithValue(value != null) )
-        )
+    	$list: List()
+        $cwv1: ClassWithValue( $v: value )
+        $cwv2: ClassWithValue( value == $v - 1 )
+        
     then
-        $list.addAll($cwvs);
+    	$list.add($cwv2);
 end

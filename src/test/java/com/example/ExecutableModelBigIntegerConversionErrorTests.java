@@ -1,8 +1,9 @@
 package com.example;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -20,54 +21,56 @@ import org.kie.api.io.Resource;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
-public class ExecutableModelOrWithCollectErrorsTests {
+public class ExecutableModelBigIntegerConversionErrorTests {
 
 	private static final String PROCESS_ID = "example";
 
 	@Test
-	public void withExecutableModel_Setter() throws IOException {
+	public void withExecutableModel() throws IOException {
 
 		KieBase kbase = loadRules(true);
 		KieSession session = kbase.newKieSession();
 
 		List<ClassWithValue> list = new ArrayList<>();
-		ClassWithValue cwov = new ClassWithValue();
-		ClassWithValue cwv = new ClassWithValue();
-		cwv.setValue("VALUE");
+		ClassWithValue cwv1 = new ClassWithValue();
+		cwv1.setValue(BigInteger.ONE);
+		ClassWithValue cwv2 = new ClassWithValue();
+		cwv2.setValue(BigInteger.ZERO);
 		
 		session.insert(list);
-		session.insert(cwov);
-		session.insert(cwv);
+		session.insert(cwv1);
+		session.insert(cwv2);
 		
 		session.startProcess(PROCESS_ID);
 		
 		session.fireAllRules();
 
 		assertThat(list)
-				.containsExactlyInAnyOrder(cwov, cwv);
+				.containsExactly(cwv2);
 	}
 	
 	@Test
-	public void withoutExecutableModel_Setter() throws IOException {
+	public void withoutExecutableModel() throws IOException {
 
 		KieBase kbase = loadRules(false);
 		KieSession session = kbase.newKieSession();
 
 		List<ClassWithValue> list = new ArrayList<>();
-		ClassWithValue cwov = new ClassWithValue();
-		ClassWithValue cwv = new ClassWithValue();
-		cwv.setValue("VALUE");
-
+		ClassWithValue cwv1 = new ClassWithValue();
+		cwv1.setValue(BigInteger.ONE);
+		ClassWithValue cwv2 = new ClassWithValue();
+		cwv2.setValue(BigInteger.ZERO);
+		
 		session.insert(list);
-		session.insert(cwov);
-		session.insert(cwv);
+		session.insert(cwv1);
+		session.insert(cwv2);
 		
 		session.startProcess(PROCESS_ID);
 		
 		session.fireAllRules();
 
 		assertThat(list)
-				.containsExactlyInAnyOrder(cwov, cwv);
+				.containsExactly(cwv2);
 
 	}
 	
